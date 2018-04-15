@@ -1,0 +1,4 @@
+rootProject.name = 'malzahar'
+
+include 'common-jvm'
+include 'desktop'
