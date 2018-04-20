@@ -3,10 +3,7 @@
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
-        <implements>common-jvm_test</implements>
-        <compilerSettings>
-          <option name="additionalArguments" value="-Xmulti-platform" />
-        </compilerSettings>
+        <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../../desktop/build/classes/kotlin/test" />
           <option name="noStdlib" value="true" />
@@ -21,7 +18,9 @@
             <array />
           </option>
           <option name="pluginClasspaths">
-            <array />
+            <array>
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-gradle-serialization-plugin/0.4.2/99f925dc0a799c8dc20ee9046bb85381774e3a7b/kotlinx-gradle-serialization-plugin-0.4.2.jar" />
+            </array>
           </option>
         </compilerArguments>
       </configuration>
