@@ -1,5 +1,6 @@
 package com.lewisjmorgan.malzahar
 
+import com.lewisjmorgan.malzahar.test.fromTestApi
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
@@ -11,11 +12,14 @@ import kotlin.test.assertEquals
  */
 class RiotSpeck : Spek({
   describe("interacting with Riot's core API") {
-    val riot by memoized { Riot("RGAPI-6451c260-0fac-4434-af49-47febb7b1ae3") }
+    val riot by memoized { Riot.fromTestApi() }
     on("getting a summoner by name") {
-      val summoner = riot.getSummonerByName("Reats")
-      it("returns a summoner") {
-        assertEquals("Reats", summoner)
+      val summoners = listOf("Reats", "A Fiddley Foe")
+      summoners.forEach {
+        it("returns a summoner named $it") {
+          val summoner = riot.getSummonerByName(it)
+          assertEquals(it, summoner)
+        }
       }
     }
   }
