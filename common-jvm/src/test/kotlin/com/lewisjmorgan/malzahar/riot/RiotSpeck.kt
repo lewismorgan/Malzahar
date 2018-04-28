@@ -1,6 +1,6 @@
-package com.lewisjmorgan.malzahar
+package com.lewisjmorgan.malzahar.riot
 
-import com.lewisjmorgan.malzahar.test.fromTestApi
+import com.lewisjmorgan.malzahar.riot.test.fromTestApi
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
@@ -16,7 +16,7 @@ class RiotSpeck : Spek({
     on("getting a summoner by name") {
       val summoners = listOf("Reats", "A Fiddley Foe")
       summoners.forEach {
-        it("returns a summoner named $it") {
+        it("returns summoner $it") {
           val summoner = riot.getSummonerByName(it)
           assertEquals(it, summoner)
         }

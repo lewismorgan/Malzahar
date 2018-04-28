@@ -13,6 +13,7 @@ ext {
     klaxon_version = '2.1.14'
     rxkotlin_version = '2.2.0'
     flogger_version = '0.1'
+    klaxon_version = '3.0.1'
 
     // Testing
     spek_version = '1.1.5'
@@ -31,6 +32,8 @@ dependencies {
         // Uses jdk7
         exclude group: 'org.jetbrains.kotlin'
     }
+    implementation "com.github.karn:khttp-rxjava:master-SNAPSHOT"
+    implementation "com.beust:klaxon:$klaxon_version"
 
     implementation "com.google.flogger:flogger:$flogger_version"
     implementation "com.google.flogger:flogger-system-backend:$flogger_version"

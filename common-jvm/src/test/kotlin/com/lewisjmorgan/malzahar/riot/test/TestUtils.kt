@@ -1,6 +1,6 @@
-package com.lewisjmorgan.malzahar.test
+package com.lewisjmorgan.malzahar.riot.test
 
-import com.lewisjmorgan.malzahar.Riot
+import com.lewisjmorgan.malzahar.riot.Riot
 import java.util.*
 
 /**
@@ -8,7 +8,7 @@ import java.util.*
  */
 fun Riot.Companion.fromTestApi(): Riot {
   val properties = Properties()
-  properties.load(Riot::class.java.getResourceAsStream("key.properties"))
+  properties.load(Riot::class.java.getResourceAsStream("/key.properties"))
   val key = properties.getProperty("key")!!
   return Riot(key)
 }

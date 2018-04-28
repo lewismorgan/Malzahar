@@ -1,6 +1,6 @@
-package com.lewisjmorgan.malzahar.desktop.view
+package com.lewisjmorgan.malzahar.riot.desktop.view
 
-import com.lewisjmorgan.malzahar.desktop.riot
+import com.lewisjmorgan.malzahar.riot.desktop.riot
 import javafx.geometry.Pos
 import tornadofx.*
 

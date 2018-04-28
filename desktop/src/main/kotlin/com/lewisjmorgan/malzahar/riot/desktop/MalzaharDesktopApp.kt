@@ -1,7 +1,7 @@
-package com.lewisjmorgan.malzahar.desktop
+package com.lewisjmorgan.malzahar.riot.desktop
 
-import com.lewisjmorgan.malzahar.Riot
-import com.lewisjmorgan.malzahar.desktop.view.MainView
+import com.lewisjmorgan.malzahar.riot.Riot
+import com.lewisjmorgan.malzahar.riot.desktop.view.MainView
 import javafx.stage.Stage
 import mu.KLogging
 import tornadofx.*
