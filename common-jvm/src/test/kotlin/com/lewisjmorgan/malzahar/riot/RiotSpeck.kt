@@ -18,7 +18,9 @@ class RiotSpeck : Spek({
       summoners.forEach {
         it("returns summoner $it") {
           val summoner = riot.getSummonerByName(it)
-          assertEquals(it, summoner)
+          summoner.subscribe { summonerDto ->
+            assertEquals(it, summonerDto.name)
+          }
         }
       }
     }
