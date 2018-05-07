@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.desktop.view
+package com.lewisjmorgan.malzahar.riot.desktop.view
 
 import javafx.scene.Node
 import mu.KLogging

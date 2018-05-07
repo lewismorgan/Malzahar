@@ -1,7 +1,70 @@
+// Core Malzahar Library for JVM
+buildscript {
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
+    }
+}
+
 apply plugin: 'kotlin-platform-jvm'
-apply plugin: 'kotlinx-serialization'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+ext {
+
+    klaxon_version = '2.1.14'
+    rxkotlin_version = '2.2.0'
+    flogger_version = '0.1'
+    klaxon_version = '3.0.1'
+
+    // Testing
+    spek_version = '1.1.5'
+}
+
+repositories {
+    maven { url = "http://dl.bintray.com/jetbrains/spek" }
+}
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+
+    implementation ("com.github.jkcclemens:khttp:master-SNAPSHOT") {
+        // Uses jdk7
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    implementation "com.github.karn:khttp-rxjava:master-SNAPSHOT"
+    implementation "com.beust:klaxon:$klaxon_version"
+
+    implementation "com.google.flogger:flogger:$flogger_version"
+    implementation "com.google.flogger:flogger-system-backend:$flogger_version"
+
+    // Testing
+    // Uses jdk7 instead of jdk8 for some reason
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    //testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile ("org.jetbrains.spek:spek-api:$spek_version") {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+    testCompile ("org.jetbrains.spek:spek-junit-platform-engine:$spek_version") {
+        exclude group: 'org.junit.platform'
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testCompile "org.junit.platform:junit-platform-runner:1.1.1"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
 }
