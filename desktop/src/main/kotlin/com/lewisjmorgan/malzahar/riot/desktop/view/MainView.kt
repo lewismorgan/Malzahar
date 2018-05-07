@@ -27,7 +27,7 @@ class MainView : BaseView("Malzahar") {
           alignment = Pos.CENTER
           vbox {
             spacing = 5.0
-            label(riot.getSummonerByName("Reats"))
+            label(riot.getSummonerByName("Reats").blockingGet().name)
             label("Level 30")
           }
           vbox {
