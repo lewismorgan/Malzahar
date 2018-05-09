@@ -1,6 +1,5 @@
 package com.lewisjmorgan.malzahar.riot.desktop.view
 
-import com.lewisjmorgan.malzahar.riot.desktop.riot
 import javafx.geometry.Pos
 import tornadofx.*
 
@@ -27,7 +26,7 @@ class MainView : BaseView("Malzahar") {
           alignment = Pos.CENTER
           vbox {
             spacing = 5.0
-            label(riot.getSummonerByName("Reats").blockingGet().name)
+            label("Reats")
             label("Level 30")
           }
           vbox {
