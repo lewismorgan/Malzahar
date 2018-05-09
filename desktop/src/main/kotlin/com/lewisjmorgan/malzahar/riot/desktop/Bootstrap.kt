@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.desktop
+package com.lewisjmorgan.malzahar.riot.desktop
 
 import javafx.application.Application
 

@@ -1,28 +1,33 @@
 ext {
-    kotlin_version = '1.2.40'
+    kotlin_version = '1.2.41'
     serialization_version = '0.4.2'
 }
 
+group 'com.lewisjmorgan'
+
 allprojects {
-    group 'com.lewisjmorgan.malzahar'
     version '1.0-SNAPSHOT'
 
     apply plugin: 'idea'
 
     repositories {
         jcenter()
+        maven {
+            name 'jitpack'
+            url 'https://jitpack.io'
+        }
     }
 }
 
 subprojects {
+    group 'com.lewisjmorgan.malzahar'
+
     buildscript {
         repositories {
             jcenter()
-            maven { url "https://kotlin.bintray.com/kotlinx" }
         }
         dependencies {
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-            classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
         }
     }
 }
