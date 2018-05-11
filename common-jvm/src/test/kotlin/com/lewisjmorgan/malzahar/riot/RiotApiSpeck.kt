@@ -1,5 +1,8 @@
 package com.lewisjmorgan.malzahar.riot
 
+import com.lewisjmorgan.malzahar.riot.summoner.getSummoner
+import com.lewisjmorgan.malzahar.riot.summoner.getSummonerByAccount
+import com.lewisjmorgan.malzahar.riot.summoner.getSummonerByName
 import com.lewisjmorgan.malzahar.riot.test.fromTestApi
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
