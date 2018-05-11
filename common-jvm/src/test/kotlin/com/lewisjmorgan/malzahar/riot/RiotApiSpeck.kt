@@ -6,31 +6,23 @@ import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 
-
 class RiotApiSpeck : Spek({
   describe("Riot Summoner API") {
-    val riotApi by memoized { RiotApi.fromTestApi() }
-    on("getting a summoner by name") {
-      val summoners = listOf("Reats", "A Fiddley Foe")
-      summoners.forEach {
-        it("returns summoner with name $it") {
-          riotApi.getSummonerByName(it).test()
-              .assertValue { summoner -> summoner.name == it }
-        }
+    // TODO Tests for jsonResponseString using mocks
+    val api by memoized { RiotApi.fromTestApi() }
+
+    on("getting a json response string") {
+      it("should return a RiotApiException result for empty request") {
+        api.getJsonResponseString("")
+            .test()
+            .assertError(RiotApiException::class.java)
+            .assertNotComplete()
       }
-    }
-    on("getting a summoner by id") {
-      val id = 21661091L
-      it("returns a summoner with id $id") {
-        riotApi.getSummoner(id).test()
-            .assertValue { summoner -> summoner.id == id }
-      }
-    }
-    on("getting a summoner by account") {
-      val accountId = 35140718L
-      it("returns a summoner with account id $accountId") {
-        riotApi.getSummonerByAccount(accountId).test()
-            .assertValue { summoner -> summoner.accountId == accountId }
+      it("should return a message body for a 200 request") {
+        api.getJsonResponseString("/static-data/v3/tarball-links")
+            .test()
+            .assertComplete()
+            .assertValue { result -> !result.component1().isNullOrEmpty() }
       }
     }
   }
