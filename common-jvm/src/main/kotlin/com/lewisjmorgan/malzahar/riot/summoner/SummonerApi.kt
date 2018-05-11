@@ -2,7 +2,6 @@ package com.lewisjmorgan.malzahar.riot.summoner
 
 import com.beust.klaxon.Klaxon
 import com.lewisjmorgan.malzahar.riot.RiotApi
-import com.lewisjmorgan.malzahar.riot.league.dto.SummonerDto
 import io.reactivex.Single
 
 /**
