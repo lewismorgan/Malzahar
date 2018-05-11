@@ -28,9 +28,11 @@ class RiotApi(key: String) {
    * @return Single<Result<String, FuelError>>
    */
   internal fun getJsonResponseString(path: String): Single<Result<String, FuelError>> {
+    // TODO Refactor method to call a lower level "request" which allows accessing the request, response
     val url = Fuel.get(path)
     logger.atFinest().log("Request URL ${url.url.toExternalForm()}")
     // TODO Figure out why subscribing on IO is not working.
     return Fuel.get(path).rx_responseString().map { pair -> pair.second }
   }
+
 }
