@@ -1,8 +1,6 @@
 package com.lewisjmorgan.malzahar.riot.champion
 
 import com.lewisjmorgan.malzahar.riot.RiotApi
-import com.lewisjmorgan.malzahar.riot.champions.getChampion
-import com.lewisjmorgan.malzahar.riot.champions.getChampions
 import com.lewisjmorgan.malzahar.riot.test.fromTestApi
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
