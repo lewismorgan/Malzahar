@@ -1,14 +1,11 @@
 package com.lewisjmorgan.malzahar.riot
 
 import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.rx.rx_responseString
-import com.github.kittinunf.result.Result
 import com.google.common.flogger.FluentLogger
 import io.reactivex.Single
-
-// TODO Move summoner methods into API extension functions
 
 class RiotApi(key: String) {
   companion object {
@@ -23,16 +20,38 @@ class RiotApi(key: String) {
   }
 
   /**
-   * Pushes a request to the Riot API with the provided path using reactive principles.
+   * Creates a request to the Riot API using the specified path and maps the response message to a
+   * string for manipulation.
    * @param path String
    * @return Single<Result<String, FuelError>>
    */
-  internal fun getJsonResponseString(path: String): Single<Result<String, FuelError>> {
-    // TODO Refactor method to call a lower level "request" which allows accessing the request, response
-    val url = Fuel.get(path)
-    logger.atFinest().log("Request URL ${url.url.toExternalForm()}")
-    // TODO Figure out why subscribing on IO is not working.
-    return Fuel.get(path).rx_responseString().map { pair -> pair.second }
+  fun getJsonResponseString(path: String): Single<String> {
+    return getJsonResponseString(path, listOf())
   }
 
+  /**
+   * Creates a request to the Riot API using the specified path and parameters. The response is then mapped
+   * to a string for manipulation.
+   * @param path String
+   * @param params List<Pair<String, String>>
+   * @return Single<String>
+   */
+  fun getJsonResponseString(path: String, params: List<Pair<String, String>>): Single<String> {
+    return request(path, params).map { (_, result) -> result }
+  }
+
+  /**
+   * Creates a request to the API with the given path and parameters. Note that requests are created
+   * without a specified thread subscription. It's recommended to subscribe onto the IO.
+   * @param path String
+   * @param params List<Pair<String, String>>
+   * @return Single<Pair<Response, String>>
+   */
+  fun request(path: String, params: List<Pair<String, String>>): Single<Pair<Response, String>> {
+    logger.atFinest().log("Requesting created for: $path with ${params.size} parameters")
+    for ((key, value) in params) {
+      logger.atFinest().log("Param: $key:$value")
+    }
+    return Fuel.get(path, params).rx_responseString().map { (response, result) -> Pair(response, result.get()) }
+  }
 }

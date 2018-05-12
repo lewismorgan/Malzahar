@@ -10,8 +10,8 @@ import io.reactivex.Single
  * @return Single<SummonerDto>
  */
 fun RiotApi.getSummonerByName(name: String): Single<SummonerDto?> {
-  return getJsonResponseString("summoner/v3/summoners/by-name/$name").map { (result) ->
-    Klaxon().parse<SummonerDto>(result!!)
+  return getJsonResponseString("summoner/v3/summoners/by-name/$name").map { result ->
+    Klaxon().parse<SummonerDto>(result)
   }!!
 }
 
@@ -21,8 +21,8 @@ fun RiotApi.getSummonerByName(name: String): Single<SummonerDto?> {
  * @return Single<SummonerDto?>
  */
 fun RiotApi.getSummoner(summonerId: Long): Single<SummonerDto?> {
-  return getJsonResponseString("summoner/v3/summoners/$summonerId").map { (result) ->
-    Klaxon().parse<SummonerDto>(result!!)
+  return getJsonResponseString("summoner/v3/summoners/$summonerId").map { result ->
+    Klaxon().parse<SummonerDto>(result)
   }
 }
 
@@ -32,7 +32,7 @@ fun RiotApi.getSummoner(summonerId: Long): Single<SummonerDto?> {
  * @return Single<SummonerDto?>
  */
 fun RiotApi.getSummonerByAccount(accountId: Long): Single<SummonerDto?> {
-  return getJsonResponseString("summoner/v3/summoners/by-account/$accountId").map { (result) ->
-    Klaxon().parse<SummonerDto>(result!!)
+  return getJsonResponseString("summoner/v3/summoners/by-account/$accountId").map { result ->
+    Klaxon().parse<SummonerDto>(result)
   }
 }
