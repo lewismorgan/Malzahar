@@ -10,6 +10,10 @@ import com.github.kittinunf.fuel.core.Response
 internal fun riotValidatorResponseInterceptor(): (Request, Response) -> Response = { _, response ->
   // A response of 200 is the only one that should be considered a valid response
   // https://developer.riotgames.com/response-codes.html
+  if (!response.headers.containsKey("Content-Type") || !response.headers["Content-Type"]!!.contains("application/json;charset=utf-8")) {
+    throw RiotApiException(-1, "Response did not specify content type or was not JSON-UTF8")
+  }
+
   when (response.statusCode) {
     200 -> response
     429 -> response // TODO Rate Limiting
