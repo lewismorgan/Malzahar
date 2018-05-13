@@ -4,7 +4,9 @@ import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
 
 /**
- * Ensures that only status code of 200 is received. Otherwise, an exception is thrown.
+ * Ensures that only status code of 200 is received. Otherwise, an appropriate exception is thrown.
+ *
+ * @param rateLimiter RiotApiRateLimiter
  * @return (Request, Response) -> Response
  */
 internal fun riotValidatorResponseInterceptor(rateLimiter: RiotApiRateLimiter): (Request, Response) -> Response = { request, response ->
@@ -16,7 +18,7 @@ internal fun riotValidatorResponseInterceptor(rateLimiter: RiotApiRateLimiter): 
 
   when (response.statusCode) {
     200 -> response
-    429 -> rateLimiter.retryRequestLater(request, response)
+    429 -> throw RiotRateLimitException(rateLimiter.getRetrySeconds(response))
     else -> throw RiotApiException(response.statusCode, response.responseMessage)
   }
 }

@@ -53,6 +53,9 @@ class RiotApi(key: String) {
     for ((key, value) in params) {
       logger.atFinest().log("Param: $key:$value")
     }
-    return Fuel.get(path, params).rx_responseString().map { (response, result) -> Pair(response, result.get()) }
+    // TODO doOnError for RiotRateLimit exception
+    return Fuel.get(path, params).rx_responseString()
+        .map { (response, result) -> Pair(response, result.get()) }
+
   }
 }

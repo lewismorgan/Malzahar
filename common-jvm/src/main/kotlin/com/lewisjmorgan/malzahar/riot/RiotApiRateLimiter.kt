@@ -1,20 +1,23 @@
 package com.lewisjmorgan.malzahar.riot
 
-import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
-
-// TODO Application Rate Limits
-// TODO Method Rate Limits
-// TODO Service Rate Limits
+import com.google.common.flogger.FluentLogger
 
 class RiotApiRateLimiter {
-  /**
-   * Retries a request based on the headers in the response.
-   * @param request Request
-   * @param response Response
-   * @return Response
-   */
-  fun retryRequestLater(request: Request, response: Response): Response {
-    TODO("not implemented")
+  companion object {
+    val logger = FluentLogger.forEnclosingClass()!!
+  }
+
+  fun getRetrySeconds(response: Response): Long {
+    // Included in any 429 response
+    val limitType = response.headers["X-Rate-Limit-Type"]!!
+    when (limitType[0]) {
+      "application", "method", "service" -> {
+        logger.atFine().log("Getting rate limit seconds from $response")
+        return response.headers["Retry-After"]!![0].toLong()
+      }
+      else -> throw RiotRateLimitTypeException(limitType[0])
+    }
+    // TODO X-Rate-Limit-Type and Retry-After may not be given for underlying service enforcement
   }
 }
