@@ -16,7 +16,7 @@ class RiotApi(key: String) {
     FuelManager.instance.basePath = "https://na1.api.riotgames.com/lol"
     FuelManager.instance.baseParams = listOf("api_key" to key)
     FuelManager.instance.removeAllResponseInterceptors()
-    FuelManager.instance.addResponseInterceptor { riotValidatorResponseInterceptor() }
+    FuelManager.instance.addResponseInterceptor { riotValidatorResponseInterceptor(RiotApiRateLimiter()) }
   }
 
   /**
