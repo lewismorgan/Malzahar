@@ -1,6 +1,7 @@
 package com.lewisjmorgan.malzahar.riot.test
 
 import com.lewisjmorgan.malzahar.riot.RiotApi
+import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -18,3 +19,5 @@ fun RiotApi.Companion.fromTestApi(): RiotApi {
     throw Exception("No API Key set in key.txt. Please add your key to the file.")
   }
 }
+
+fun String.toURL() = URL(this)
