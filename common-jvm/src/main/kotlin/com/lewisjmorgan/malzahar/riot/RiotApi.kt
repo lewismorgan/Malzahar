@@ -57,7 +57,7 @@ class RiotApi(key: String = "") {
    */
   fun request(path: String, params: List<Pair<String, String>>): Single<Pair<Response, String>> {
     // TODO Making this public leaks the Fuel dependency when it's not really necessary for end-users
-    logger.atFine().log("Requesting created for: $path with ${params.size} parameters")
+    logger.atInfo().log("Requesting created for: $path with ${params.size} parameters")
     return createRequest(path, params)
         .retryWhen { errors ->
           errors.flatMap { error -> onResponseException(error) }

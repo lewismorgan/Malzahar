@@ -3,6 +3,7 @@ package com.lewisjmorgan.malzahar.riot
 import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
 
+// TODO Test this method individually
 /**
  * Ensures that only status code of 200 is received. Otherwise, an appropriate exception is thrown.
  *
