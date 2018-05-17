@@ -34,18 +34,8 @@ class RiotApiSpeck : Spek({
               .assertValue { (_, message) -> message == expectedMessageBody }
         }
       }
-      on("a thrown RiotRateLimitException") {
-        val headers = mapOf(
-            "X-Rate-Limit-Type" to listOf("application"),
-            "Retry-After" to listOf(3L.toString()))
-        mockCreateRequest(api, headers, 429, "", "")
-
-        it("should retry the request") {
-          api.request(path, listOf())
-              .test()
-              .assertComplete()
-        }
-      }
+      // TODO Tests for thrown RiotRateLimitException using mocks.
+      // Request method handles this through retryWhen for the error and then creating a timer for x seconds
     }
     describe("getting a response string") {
       on("a proper request") {
@@ -64,8 +54,11 @@ class RiotApiSpeck : Spek({
 internal fun mockCreateRequest(api: RiotApi, headers: Map<String, List<String>>, statusCode: Int,
                                responseMessage: String,
                                resultValue: String) {
-  val response = Response("http://.".toURL(), headers = headers, statusCode = statusCode, responseMessage = responseMessage)
+  val response = createResponse(headers, statusCode, responseMessage)
   every {
     api invoke "createRequest" withArguments listOf("", listOf<Pair<String, String>>())
   } returns Single.just(Pair(response, Result.Success<String, FuelError>(resultValue)))
 }
+
+internal fun createResponse(headers: Map<String, List<String>>, statusCode: Int, responseMessage: String) =
+    Response("http://.".toURL(), headers = headers, statusCode = statusCode, responseMessage = responseMessage)
