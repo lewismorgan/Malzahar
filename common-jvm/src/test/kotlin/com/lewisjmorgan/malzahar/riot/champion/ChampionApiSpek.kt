@@ -18,7 +18,7 @@ class ChampionApiSpek : Spek({
       it("should return a list of free to play champions") {
         champions.test()
             .assertComplete()
-            .assertValue { list -> list.size > 1 }
+            .assertValue { it.none { !it.freeToPlay } }
       }
     }
     on("getting a champion by id") {

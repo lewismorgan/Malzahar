@@ -12,8 +12,8 @@ import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
 class RiotApi(key: String = "") {
-  // TODO See if this can actually just be moved into RiotApi
   private val rateLimiter = RiotApiRateLimiter()
+  private val responseInterceptor = riotValidatorResponseInterceptor(rateLimiter)
 
   companion object {
     val logger = FluentLogger.forEnclosingClass()!!
@@ -23,7 +23,7 @@ class RiotApi(key: String = "") {
     FuelManager.instance.basePath = "https://na1.api.riotgames.com/lol"
     FuelManager.instance.baseParams = listOf("api_key" to key)
     FuelManager.instance.removeAllResponseInterceptors()
-    FuelManager.instance.addResponseInterceptor { riotValidatorResponseInterceptor(rateLimiter) }
+    FuelManager.instance.addResponseInterceptor { responseInterceptor }
   }
 
   /**

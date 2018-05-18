@@ -52,8 +52,7 @@ class RiotApiSpeck : Spek({
 })
 
 internal fun mockCreateRequest(api: RiotApi, headers: Map<String, List<String>>, statusCode: Int,
-                               responseMessage: String,
-                               resultValue: String) {
+                               responseMessage: String, resultValue: String) {
   val response = createResponse(headers, statusCode, responseMessage)
   every {
     api invoke "createRequest" withArguments listOf("", listOf<Pair<String, String>>())
