@@ -43,7 +43,7 @@ class RiotApi(key: String = "") {
    * @param params List<Pair<String, String>>
    * @return Single<String>
    */
-  fun getJsonResponseString(path: String, params: List<Pair<String, String>>): Single<String> {
+  fun getJsonResponseString(path: String, params: List<Pair<String, Any>>): Single<String> {
     return request(path, params).map { (_, result) -> result }
   }
 
@@ -55,7 +55,7 @@ class RiotApi(key: String = "") {
    * @param params List<Pair<String, String>>
    * @return Single<Pair<Response, String>>
    */
-  fun request(path: String, params: List<Pair<String, String>>): Single<Pair<Response, String>> {
+  fun request(path: String, params: List<Pair<String, Any>>): Single<Pair<Response, String>> {
     // TODO Making this public leaks the Fuel dependency when it's not really necessary for end-users
     logger.atInfo().log("Requesting created for: $path with ${params.size} parameters")
     return createRequest(path, params)
@@ -66,7 +66,7 @@ class RiotApi(key: String = "") {
         .map { (response, result) -> Pair(response, result.get()) }
   }
 
-  private fun createRequest(path: String, params: List<Pair<String, String>>): Single<Pair<Response, Result<String, FuelError>>> {
+  private fun createRequest(path: String, params: List<Pair<String, Any>>): Single<Pair<Response, Result<String, FuelError>>> {
     return Fuel.get(path, params).rx_responseString()
   }
 
