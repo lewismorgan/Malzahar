@@ -1,6 +1,9 @@
-package com.lewisjmorgan.malzahar.riot.champion.mastery
+package com.lewisjmorgan.malzahar.riot.lol.champion.mastery
 
 import com.lewisjmorgan.malzahar.riot.RiotApi
+import com.lewisjmorgan.malzahar.riot.champion.mastery.getMasteriesBySummoner
+import com.lewisjmorgan.malzahar.riot.champion.mastery.getMasteryForChampion
+import com.lewisjmorgan.malzahar.riot.champion.mastery.getTotalMasteryScore
 import com.lewisjmorgan.malzahar.riot.test.fromTestApi
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
