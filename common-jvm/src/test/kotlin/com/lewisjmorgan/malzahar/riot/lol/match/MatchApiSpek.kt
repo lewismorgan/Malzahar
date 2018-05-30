@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.riot.match
+package com.lewisjmorgan.malzahar.riot.lol.match
 
 import com.lewisjmorgan.malzahar.riot.RiotApi
 import com.lewisjmorgan.malzahar.riot.test.fromTestApi

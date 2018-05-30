@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.riot.league
+package com.lewisjmorgan.malzahar.riot.lol.champion.league
 
 data class MiniSeriesDto(val wins: Int, val losses: Int, val target: Int, val progress: String)
 

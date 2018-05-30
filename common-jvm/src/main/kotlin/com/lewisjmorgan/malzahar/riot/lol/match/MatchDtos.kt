@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.riot.match
+package com.lewisjmorgan.malzahar.riot.lol.match
 
 data class MatchDto(val seasonId: Int, val queueId: Int, val gameId: Long, val participantIdentities: List<ParticipantIdentityDto>,
                     val gameVersion: String, val platformId: String, val gameMode: String, val mapId: Int,

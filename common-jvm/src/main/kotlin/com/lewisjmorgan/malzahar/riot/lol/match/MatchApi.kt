@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.riot.match
+package com.lewisjmorgan.malzahar.riot.lol.match
 
 import com.beust.klaxon.Klaxon
 import com.lewisjmorgan.malzahar.riot.RiotApi
