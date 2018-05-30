@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.riot.summoner
+package com.lewisjmorgan.malzahar.riot.lol.summoner
 
 /**
  * /lol/summoner/v3/summoners/by-account/{accountId}

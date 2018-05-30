@@ -1,4 +1,4 @@
-package com.lewisjmorgan.malzahar.riot.summoner
+package com.lewisjmorgan.malzahar.riot.lol.summoner
 
 import com.beust.klaxon.Klaxon
 import com.lewisjmorgan.malzahar.riot.RiotApi
