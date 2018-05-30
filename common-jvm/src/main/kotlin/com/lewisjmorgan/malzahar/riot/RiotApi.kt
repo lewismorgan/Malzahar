@@ -11,7 +11,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
-class RiotApi(key: String = "") {
+class RiotApi(key: String = "") : IRiotApi {
   private val rateLimiter = RiotApiRateLimiter()
   private val responseInterceptor = riotValidatorResponseInterceptor(rateLimiter)
 
@@ -26,36 +26,15 @@ class RiotApi(key: String = "") {
     FuelManager.instance.addResponseInterceptor { responseInterceptor }
   }
 
-  /**
-   * Creates a request to the Riot API using the specified path and maps the response message to a
-   * string for manipulation.
-   * @param path String
-   * @return Single<Result<String, FuelError>>
-   */
-  fun getJsonResponseString(path: String): Single<String> {
+  override fun getJsonResponseString(path: String): Single<String> {
     return getJsonResponseString(path, listOf())
   }
 
-  /**
-   * Creates a request to the Riot API using the specified path and parameters. The response is then mapped
-   * to a string for manipulation.
-   * @param path String
-   * @param params List<Pair<String, String>>
-   * @return Single<String>
-   */
-  fun getJsonResponseString(path: String, params: List<Pair<String, Any>>): Single<String> {
+  override fun getJsonResponseString(path: String, params: List<Pair<String, Any>>): Single<String> {
     return request(path, params).map { (_, result) -> result }
   }
 
-  /**
-   * Creates a request to the API with the given path and parameters. Requests do not assume a thread
-   * to subscribe to. Requests that throw a RiotRateLimitException will retry after the specified
-   * amount of seconds within the received response header.
-   * @param path String
-   * @param params List<Pair<String, String>>
-   * @return Single<Pair<Response, String>>
-   */
-  fun request(path: String, params: List<Pair<String, Any>>): Single<Pair<Response, String>> {
+  override fun request(path: String, params: List<Pair<String, Any>>): Single<Pair<Response, String>> {
     // TODO Making this public leaks the Fuel dependency when it's not really necessary for end-users
     logger.atInfo().log("Requesting created for: $path with ${params.size} parameters")
     return createRequest(path, params)
